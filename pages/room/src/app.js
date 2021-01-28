@@ -11,7 +11,15 @@ const recordClick = function (recorderBtn) {
 const onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const room = urlParams.get('room');
-  console.log('this is the room', room)
+  const peerConfig = Object.values({
+    id: undefined,
+    config:{
+      port: 9000,
+      host: 'localhost',
+      path: '/'
+    }
+  })
+  const peerBuilder = new PeerBuilder({ peerConfig })
 
   // const recorderBtn = document.getElementById('record')
   // recorderBtn.addEventListener('click', recordClick(recorderBtn))
@@ -23,7 +31,8 @@ const onload = () => {
     view,
     media,
     room,
-    socketBuilder
+    socketBuilder,
+    peerBuilder
   }
   Business.initialize(deps)
 }
